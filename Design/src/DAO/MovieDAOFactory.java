@@ -1,9 +1,7 @@
 package DAO;
 import Movies.*;
 public class MovieDAOFactory {
-	
-	public static Movie getMoivesDAO() {
-		
+	public static Movie getMoivesDAO() {		
 		return new Movie();
 	}
 	public static Actor getActorDAO() {
@@ -17,5 +15,11 @@ public class MovieDAOFactory {
 	}
 	public static Play getPlayDAO() {
 		return new Play();
+	}
+	public static Direct getDirect() {
+		return new Direct();
+	}
+	public static Edit getEdit() {
+		return new Edit();
 	}
 }

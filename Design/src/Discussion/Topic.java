@@ -2,6 +2,7 @@ package Discussion;
 
 import java.util.Date;
 
+
 public class Topic {
 
 	private String Tono;	//ª∞Ã‚±‡∫≈

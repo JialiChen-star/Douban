@@ -1,6 +1,5 @@
 package Movies;
 
-import java.util.Date;
 
 public class Movie {
 
@@ -9,7 +8,7 @@ public class Movie {
 	private String Mmn;  //又名
 	private String Mt;  //类型
 	private String Ml; //语言
-	private Date Ud; //上映时间
+	private String Ud; //上映时间
 	private String ACon; //制片地区
 	private String TL; //片长
 	private String Bri; //简介
@@ -38,10 +37,10 @@ public class Movie {
 	public void setMt(String mt) {
 		Mt = mt;
 	}
-	public Date getUd() {
+	public String getUd() {
 		return Ud;
 	}
-	public void setUd(Date ud) {
+	public void setUd(String ud) {
 		Ud = ud;
 	}
 	public String getACon() {

@@ -3,7 +3,12 @@ import DateBaseConnection.*;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.naming.spi.DirStateFactory.Result;
 
 public class MovieDAOImpl implements MovieDAO{
 
@@ -17,7 +22,7 @@ public class MovieDAOImpl implements MovieDAO{
 		pstm.setString(3, mo.getMmn());
 		pstm.setString(4, mo.getMt());
 		pstm.setString(5, mo.getMl());
-		pstm.setDate(6, (Date) mo.getUd());
+		pstm.setString(6,  mo.getUd());
 		pstm.setString(7, mo.getACon());
 		pstm.setString(8, mo.getTL());
 		pstm.setString(9, mo.getBri());
@@ -26,23 +31,74 @@ public class MovieDAOImpl implements MovieDAO{
 		db.close();
 	}
 
-	public void UpdateMovie(Movie mo) throws Exception {
-		
-	}
-
 	public void DeleteMovie(String Mno) throws Exception {
 
+		DateBaseconnection db=new DateBaseconnection();
+		PreparedStatement pstm=db.getConnection().prepareStatement("delete form Movies where MNO=?");
+		pstm.setString(1, Mno);
+		pstm.executeUpdate();
+		pstm.close();
+		db.close();
+	}
+	
+	public void UpdateMovie(Movie mo) throws Exception {	//插入修改后的数据
+		
+		String Mno=mo.getMmn();
+		DeleteMovie(Mno);
+		InsertMovie(mo);
 	}
 
-	public Movie getMovie(String Mno) {
-		return null;
+	public Movie getMovie(String Mno) throws Exception{
+		
+		Movie movie=new Movie();
+		DateBaseconnection db=new DateBaseconnection();
+		PreparedStatement pstm=db.getConnection().prepareStatement("selete * from Movie where MNO=?");
+		pstm.setString(1, Mno);
+		pstm.executeUpdate();
+		ResultSet rs=pstm.executeQuery();
+		while(rs.next())
+		{
+			movie.setMno(rs.getString(1));
+			movie.setMn(rs.getString(2));
+			movie.setMmn(rs.getString(3));
+			movie.setMt(rs.getString(4));
+			movie.setMl(rs.getString(5));
+			movie.setUd(rs.getString(6));
+			movie.setACon(rs.getString(7));
+			movie.setTL(rs.getString(8));
+			movie.setBri(rs.getString(9));
+			movie.setPic(rs.getString(10));
+			
+		}
+		rs.close();
+		pstm.close();
+		db.close();
+		return movie;
 	}
 
 	public List<Movie> GetMovies(String sql) throws Exception{
-		
-		return null;
+		List<Movie> movies=new ArrayList<Movie>();
+		DateBaseconnection db=new DateBaseconnection();
+		PreparedStatement pstm=db.getConnection().prepareStatement(sql);
+		ResultSet rs=pstm.executeQuery();
+		while(rs.next())
+		{
+			Movie movie=new Movie();
+			movie.setMno(rs.getString(1));
+			movie.setMn(rs.getString(2));
+			movie.setMmn(rs.getString(3));
+			movie.setMt(rs.getString(4));
+			movie.setMl(rs.getString(5));
+			movie.setUd(rs.getString(6));
+			movie.setACon(rs.getString(7));
+			movie.setTL(rs.getString(8));
+			movie.setBri(rs.getString(9));
+			movie.setPic(rs.getString(10));	
+			movies.add(movie);
+		}
+		rs.close();
+		pstm.close();
+		db.close();
+		return movies;
 	}
-
-	
-	
 }
