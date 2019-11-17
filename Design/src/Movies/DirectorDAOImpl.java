@@ -18,8 +18,8 @@ public class DirectorDAOImpl implements DirectorDAO{
 		pstm.setString(2, dir.getDn());
 		pstm.setString(3, dir.getDsex());
 		pstm.setString(4, dir.getDcon());
-		pstm.setString(5, dir.getDpic());
-		pstm.setString(6, dir.getDbri());
+		pstm.setString(5, dir.getDbri());
+		pstm.setString(6, dir.getDpic());
 		pstm.setString(7, dir.getDBrith());
 		pstm.executeUpdate();
 		pstm.close();
@@ -46,7 +46,6 @@ public class DirectorDAOImpl implements DirectorDAO{
 		DateBaseconnection db=new DateBaseconnection();
 		PreparedStatement pstm=db.getConnection().prepareStatement("selete * from Directors where DNO=?");
 		pstm.setString(1, Dno);
-		pstm.executeUpdate();
 		ResultSet rs=pstm.executeQuery();
 		while(rs.next())
 		{
@@ -54,8 +53,8 @@ public class DirectorDAOImpl implements DirectorDAO{
 			director.setDn(rs.getString(2));
 			director.setDsex(rs.getString(3));
 			director.setDcon(rs.getString(4));
-			director.setDpic(rs.getString(5));
-			director.setDbri(rs.getString(6));
+			director.setDbri(rs.getString(5));
+			director.setDpic(rs.getString(6));
 			director.setDBrith(rs.getString(7));
 		}
 		rs.close();
@@ -77,8 +76,8 @@ public class DirectorDAOImpl implements DirectorDAO{
 			director.setDn(rs.getString(2));
 			director.setDsex(rs.getString(3));
 			director.setDcon(rs.getString(4));
-			director.setDpic(rs.getString(5));
-			director.setDbri(rs.getString(6));
+			director.setDbri(rs.getString(5));
+			director.setDpic(rs.getString(6));
 			director.setDBrith(rs.getString(7));
 			directors.add(director);
 		}

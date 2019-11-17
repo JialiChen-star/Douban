@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DateBaseconnection {
 	private String Dbdriver="com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	private String Dburl="jdbc:sqlserver://localhost:1433;databaseName=Student;user=stu;password=123";
+	private String Dburl="jdbc:sqlserver://localhost:1433;databaseName=Student;user=stu;password=123?useUnicode=true&characterEncoding=utf-8";
 	private Connection conn=null;
 	public DateBaseconnection() {
 		try {

@@ -1,14 +1,11 @@
 package Movies;
 import DateBaseConnection.*;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.naming.spi.DirStateFactory.Result;
+import java.util.Scanner;
 
 public class MovieDAOImpl implements MovieDAO{
 
@@ -22,11 +19,12 @@ public class MovieDAOImpl implements MovieDAO{
 		pstm.setString(3, mo.getMmn());
 		pstm.setString(4, mo.getMt());
 		pstm.setString(5, mo.getMl());
-		pstm.setString(6,  mo.getUd());
+		pstm.setString(6, mo.getUd());
 		pstm.setString(7, mo.getACon());
 		pstm.setString(8, mo.getTL());
 		pstm.setString(9, mo.getBri());
 		pstm.setString(10, mo.getPic());	
+		pstm.executeUpdate();
 		pstm.close();
 		db.close();
 	}
@@ -54,7 +52,6 @@ public class MovieDAOImpl implements MovieDAO{
 		DateBaseconnection db=new DateBaseconnection();
 		PreparedStatement pstm=db.getConnection().prepareStatement("selete * from Movie where MNO=?");
 		pstm.setString(1, Mno);
-		pstm.executeUpdate();
 		ResultSet rs=pstm.executeQuery();
 		while(rs.next())
 		{
@@ -77,9 +74,12 @@ public class MovieDAOImpl implements MovieDAO{
 	}
 
 	public List<Movie> GetMovies(String sql) throws Exception{
+		Scanner in=new Scanner(System.in);
 		List<Movie> movies=new ArrayList<Movie>();
 		DateBaseconnection db=new DateBaseconnection();
 		PreparedStatement pstm=db.getConnection().prepareStatement(sql);
+		String type=in.next();
+		pstm.setString(1, type);
 		ResultSet rs=pstm.executeQuery();
 		while(rs.next())
 		{
@@ -99,6 +99,7 @@ public class MovieDAOImpl implements MovieDAO{
 		rs.close();
 		pstm.close();
 		db.close();
+		in.close();
 		return movies;
 	}
 }

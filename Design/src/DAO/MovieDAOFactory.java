@@ -1,25 +1,25 @@
 package DAO;
 import Movies.*;
 public class MovieDAOFactory {
-	public static Movie getMoivesDAO() {		
-		return new Movie();
+	public static MovieDAO getMoivesDAO() {		
+		return new MovieDAOImpl();
 	}
-	public static Actor getActorDAO() {
-		return new Actor();
+	public static ActorDAO getActorDAO() {
+		return new ActorDAOImpl();
 	}
-	public static Director getDirectorDAO() {
-		return new Director();
+	public static DirectorDAO getDirectorDAO() {
+		return new DirectorDAOImpl();
 	}
-	public static Etc getEtcDAO() {
-		return new Etc();
+	public static EtcDAO getEtcDAO() {
+		return new EtcDAOImpl();
 	}
-	public static Play getPlayDAO() {
-		return new Play();
+	public static PlayDAO getPlayDAO() {
+		return new PlayDAOImpl();
 	}
-	public static Direct getDirect() {
-		return new Direct();
+	public static DirectDAO getDirect() {
+		return new DirectDAOImpl();
 	}
-	public static Edit getEdit() {
-		return new Edit();
+	public static EditDAO getEdit() {
+		return new EditDAOImpl();
 	}
 }

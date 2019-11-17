@@ -1,26 +1,26 @@
 package DAO;
 import Discussion.*;
 public class DiscussionDAOFactory {
-	public static discussion getDiscussionDAO() {
-		return new discussion();
+	public static DiscussionDAO getDiscussionDAO() {
+		return new DiscussionDAOImpl();
 	}
-	public static RePlay getRePlayDAO() {
-		return new RePlay();
+	public static RePlayDAO getRePlayDAO() {
+		return new RePlayDAOImpl();
 	}
-	public static Topic getTopicDAO() {
-		return new Topic();
+	public static TopicDAO getTopicDAO() {
+		return new TopicDAOImpl();
 	}	
-	public static Talk getTalkDAO() {
-		return new Talk();
+	public static TalkDAO getTalkDAO() {
+		return new TalkDAOImpl();
 	}
-	public static Member getMemberDAO() {
-		return new Member();
+	public static MemberDAO getMemberDAO() {
+		return new MemberDAOImpl();
 	}
-	public static InitTopic getInitTopicDAO(){
-		return new InitTopic();
+	public static InitTopicDAO getInitTopicDAO(){
+		return new InitTopicDAOImpl();
 		}
-	public static Publish getPublishDAO() {
-		return new Publish();
+	public static PublishDAO getPublishDAO() {
+		return new PublishDAOImpl();
 	}
 	public static Comment getCommnet() {
 		return new Comment();

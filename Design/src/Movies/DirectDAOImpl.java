@@ -35,7 +35,6 @@ public class DirectDAOImpl implements DirectDAO{
 		List<Direct> directs=new ArrayList<Direct>();
 		DateBaseconnection db=new DateBaseconnection();
 		PreparedStatement pstm=db.getConnection().prepareStatement(sql);
-		pstm.executeUpdate();
 		ResultSet rs=pstm.executeQuery();
 		while(rs.next())
 		{
@@ -49,6 +48,4 @@ public class DirectDAOImpl implements DirectDAO{
 		db.close();
 		return directs;
 	}
-	
-
 }
