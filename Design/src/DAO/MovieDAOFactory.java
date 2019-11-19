@@ -16,10 +16,10 @@ public class MovieDAOFactory {
 	public static PlayDAO getPlayDAO() {
 		return new PlayDAOImpl();
 	}
-	public static DirectDAO getDirect() {
+	public static DirectDAO getDirectDAO() {
 		return new DirectDAOImpl();
 	}
-	public static EditDAO getEdit() {
+	public static EditDAO getEditDAO() {
 		return new EditDAOImpl();
 	}
 }

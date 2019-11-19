@@ -21,36 +21,46 @@ public class MovieBusiness {
 	private static final String SELECT_LANGUAGE="select * from Movie where ML like '%?%'";
 	private static final String SELECT_COUNTRY="select * from Movie where ACON like '%?%'";
 	
-	public static void AddMessage() throws Exception{//电影信息插入
-		Play play=new Play();
+	public static void AddMovieMessage() throws Exception{//电影信息插入
+		
 		Movie movie=new Movie();
-		System.out.println("输入电影信息（输入null则代表该电影此信息为空）");
+//		System.out.println("输入电影信息（输入null则代表该电影此信息为空）");
 		Scanner in=new Scanner(System.in);
-		System.out.print("请输入电影编号：");
+//		System.out.print("请输入电影编号：");
 		String movieid=in.next();
 		movie.setMno(movieid);
-		System.out.print("请输入电影姓名：");
+//		System.out.print("请输入电影姓名：");
 		movie.setMn(in.next());
-		System.out.print("请输入电影又名：");
+//		System.out.print("请输入电影又名：");
 		movie.setMmn(in.next());
-		System.out.print("请输入电影类型");
+//		System.out.print("请输入电影类型");
 		movie.setMt(in.next());
-		System.out.print("请输入电影语言：");
+//		System.out.print("请输入电影语言：");
 		movie.setMl(in.next());
-		System.out.print("请输入电影上映时间：");
+//		System.out.print("请输入电影上映时间：");
 		movie.setUd(in.next());
-		System.out.print("请输入电影制片地区：");
+//		System.out.print("请输入电影制片地区：");
 		movie.setACon(in.next());
-		System.out.print("请输入电影片长：");
+//		System.out.print("请输入电影片长：");
 		movie.setTL(in.next());
-		System.out.print("请输入电影简介：");
+//		System.out.print("请输入电影简介：");
 		movie.setBri(in.next());
-		System.out.print("请插入电影图片：");
+//		System.out.print("请插入电影图片：");
 		movie.setPic(in.next());
 		MovieDAOFactory.getMoivesDAO().InsertMovie(movie);
-		System.out.print("请输入电影参演演员 编号、饰演角色及职称（即主演或配角）（以空格隔开）：");//演员参演电影表
+		AddActor(movieid);
+		AddDirector(movieid);
+		AddEtc(movieid);
+		in.close();
+	}
+	
+	public static void AddActor(String movieid) throws Exception{
+		
+		Scanner in=new Scanner(System.in);
+//		System.out.print("请输入电影参演演员 编号、饰演角色及职称（即主演或配角）（以空格隔开）：");//演员参演电影表
 		String act=in.nextLine();
 		String str[]=act.split(" ");
+		Play play=new Play();
 		play.setMno(movieid);
 		play.setAno(str[0]); //演员编号
 		play.setPn(str[1]);	//饰演角色
@@ -59,61 +69,195 @@ public class MovieBusiness {
 		DateBaseconnection db=new DateBaseconnection();
 		PreparedStatement pstm=db.getConnection().prepareStatement("select * from Actors where ANO="+str);
 		ResultSet rs=pstm.executeQuery();
-		if(rs.next())//若演员信息不存在
+		if(!rs.next())//若演员信息不存在
 		{
 			Actor actor=new Actor();
-			System.out.println("该演员不存在,请向演员表添加该演员信息");
+//			System.out.println("该演员不存在,请向演员表添加该演员信息");
 			actor.setAno(str[0]);
-			System.out.print("请输入演员姓名:");
+//			System.out.print("请输入演员姓名:");
 			actor.setAn(in.next());
-			System.out.print("请输入演员性别:");
+//			System.out.print("请输入演员性别:");
 			actor.setAsex(in.next());
-			System.out.print("请输入演员国籍:");
+//			System.out.print("请输入演员国籍:");
 			actor.setAcon(in.next());
-			System.out.print("请输入演员简介:");
+//			System.out.print("请输入演员简介:");
 			actor.setAbri(in.nextLine());
-			System.out.print("请插入演员图片:");
+//			System.out.print("请插入演员图片:");
 			actor.setApic(in.next());
-			System.out.print("请输入演员出生日期:");
+//			System.out.print("请输入演员出生日期:");
 			actor.setABrith(in.next());
 			MovieDAOFactory.getActorDAO().InsertActor(actor);
 		}
+		in.close();
 	}
-	public static void Sereach() throws Exception{
+	
+	public static void AddDirector(String movieid) throws Exception{
+		
+		Scanner in=new Scanner(System.in);
+		Direct direct=new Direct();
+//		System.out.println("请输入导演编号：");
+		DateBaseconnection db=new DateBaseconnection();
+		String str=in.next();
+		direct.setDno(str);
+		direct.setMno(movieid);
+		PreparedStatement pstm=db.getConnection().prepareStatement("select * from Actors where DNO="+str);
+		ResultSet rs=pstm.executeQuery();
+		if(!rs.next())
+		{
+//			System.out.println("该演员不存在,请向演员表添加该演员信息");
+			Director director=new Director();
+			director.setDno(str);
+//			System.out.print("请输入导演姓名:");
+			director.setDn(in.next());
+//			System.out.print("请输入演员性别:");
+			director.setDsex(in.next());
+//			System.out.print("请输入演员国籍:");
+			director.setDcon(in.next());
+//			System.out.print("请输入演员出生日期:");
+			director.setDBrith(in.next());
+//			System.out.print("请输入演员简介:");
+			director.setDbri(in.next());
+//			System.out.print("请插入演员图片:");
+			director.setDpic(in.next());
+			MovieDAOFactory.getDirectorDAO().InsertDirector(director);
+		}
+		MovieDAOFactory.getDirectDAO().InsertDirect(direct);
+		in.close();
+	}
+	
+	public static void AddEtc(String movieid) throws Exception{
+	
+		Scanner in=new Scanner(System.in);
+//		System.out.println("请输入编剧编号：");
+		String str=in.next();
+		Edit edit=new Edit();
+		DateBaseconnection db=new DateBaseconnection();
+		PreparedStatement pstm=db.getConnection().prepareStatement("select * from Actors where DNO="+str);
+		ResultSet rs=pstm.executeQuery();
+		if(!rs.next())
+		{
+//			System.out.println("该编剧不存在，,请向演员表添加该编剧信息");
+			Etc etc=new Etc();
+			etc.setEno(str);
+//			System.out.print("请输入编剧姓名:");
+			etc.setEn(in.next());
+//			System.out.print("请输入编剧性别:");
+			etc.setEsex(in.next());
+//			System.out.print("请输入编剧国籍:");
+			etc.setEcon(in.next());
+//			System.out.print("请输入编剧出生日期:");
+			etc.setEBrith(in.next());
+//			System.out.print("请输入编剧简介:");
+			etc.setEbri(in.next());
+//			System.out.print("请插入编剧图片:");
+			etc.setEpic(in.next());
+			MovieDAOFactory.getEtcDAO().InsertEtc(etc);
+		}
+		edit.setEno(str);
+		edit.setMno(movieid);
+		MovieDAOFactory.getEditDAO().InsertEdit(edit);
+		in.close();
+	}
+	
+	public static List<Movie> Sereach() throws Exception{//演员信息的输入
 
-		System.out.println("请输入想要查询的电影信息：");
-		System.out.println("输入type按电影类型查找");
-		System.out.println("输入name按电影名查找");
-		System.out.println("输入langue按电影语言查找");
-		System.out.println("输入country按电影制片地区查找");
+//		System.out.println("请输入想要查询的电影信息：");
+//		System.out.println("输入type按电影类型查找");
+//		System.out.println("输入name按电影名查找");
+//		System.out.println("输入langue按电影语言查找");
+//		System.out.println("输入country按电影制片地区查找");
 		Scanner in=new Scanner(System.in);
 		String selete=in.next();
-		List<Movie> movies=new ArrayList<Movie>();
+//		List<Movie> movies=new ArrayList<Movie>();
 		if(selete.equals("type"))
 		{
-			System.out.println("请输入要查找类型(喜剧，动作，悬疑，恐怖，爱情，科幻，战争，青春，都市，武侠，卡通，仙侠)：");
-			movies=MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_TYPE);
+//			System.out.println("请输入要查找类型(喜剧，动作，悬疑，恐怖，爱情，科幻，战争，青春，都市，武侠，卡通，仙侠)：");
+			 return MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_TYPE);
 		}
 		else if(selete.equals("name"))
 		{
-			System.out.println("请输入要查找电影名：");
-			movies=MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_MOVIENAME);
+//			System.out.println("请输入要查找电影名：");
+			return MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_MOVIENAME);
 		}
 		else if(selete.equals("languege"))
 		{
-			System.out.println("请输入要查找电影语言：");
-			movies=MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_LANGUAGE);
+//			System.out.println("请输入要查找电影语言：");
+			return MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_LANGUAGE);
 		}
 		else if(selete.equals("country"))
 		{
-			System.out.println("请输入要查找电影制片国家：");
-			movies=MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_COUNTRY);
+//			System.out.println("请输入要查找电影制片国家：");
+			return MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_COUNTRY);
 		}
 		else
 		{
-			System.out.println("输入错误！");
-		}
-		//Iterator<String> iter=movies.iterator();
-		in.close();	
+//			System.out.println("输入错误！");
+			return null;
+		}	
+	}
+		
+	public static void insertdirector(Director di) throws Exception{
+		
+		Scanner in=new Scanner(System.in);
+		Director director=new Director();
+//		System.out.println("请输入导演编号");
+		director.setDno(in.next());
+//		System.out.print("请输入导演姓名:");
+		director.setDn(in.next());
+//		System.out.print("请输入演员性别:");
+		director.setDsex(in.next());
+//		System.out.print("请输入演员国籍:");
+		director.setDcon(in.next());
+//		System.out.print("请输入演员出生日期:");
+		director.setDBrith(in.next());
+//		System.out.print("请输入演员简介:");
+		director.setDbri(in.next());
+//		System.out.print("请插入演员图片:");
+		director.setDpic(in.next());
+		MovieDAOFactory.getDirectorDAO().InsertDirector(director);
+	}
+
+	public static void insertactor(Actor actor)throws Exception
+	{
+		Scanner in=new Scanner(System.in);
+//		System.out.println("请输入演员编号：");
+		actor.setAno(in.next());
+//		System.out.print("请输入演员姓名:");
+		actor.setAn(in.next());
+//		System.out.print("请输入演员性别:");
+		actor.setAsex(in.next());
+//		System.out.print("请输入演员国籍:");
+		actor.setAcon(in.next());
+//		System.out.print("请输入演员简介:");
+		actor.setAbri(in.nextLine());
+//		System.out.print("请插入演员图片:");
+		actor.setApic(in.next());
+//		System.out.print("请输入演员出生日期:");
+		actor.setABrith(in.next());
+		MovieDAOFactory.getActorDAO().InsertActor(actor);
+	}
+
+	public static void insertetc(Etc etc) throws Exception{
+		
+		Scanner in=new Scanner(System.in);
+		etc.setEno(in.next());
+//		System.out.print("请输入编剧姓名:");
+		etc.setEn(in.next());
+//		System.out.print("请输入编剧性别:");
+		etc.setEsex(in.next());
+//		System.out.print("请输入编剧国籍:");
+		etc.setEcon(in.next());
+//		System.out.print("请输入编剧出生日期:");
+		etc.setEBrith(in.next());
+//		System.out.print("请输入编剧简介:");
+		etc.setEbri(in.next());
+//		System.out.print("请插入编剧图片:");
+		etc.setEpic(in.next());
+		MovieDAOFactory.getEtcDAO().InsertEtc(etc);
 	}
 }
+
+
+
+
+
