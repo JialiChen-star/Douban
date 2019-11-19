@@ -13,11 +13,12 @@ public class PlayDAOImpl implements PlayDAO{
 		
 		DateBaseconnection db=new DateBaseconnection();
 		db.getConnection();
-		PreparedStatement pstm=db.getConnection().prepareStatement("insert into S values(?,?,?,?)");
+		PreparedStatement pstm=db.getConnection().prepareStatement("insert into Play values(?,?,?,?)");
 		pstm.setString(1, pl.getAno());
 		pstm.setString(2, pl.getMno());
 		pstm.setString(3, pl.getPro());
 		pstm.setString(4, pl.getPn());
+		pstm.executeUpdate();
 		pstm.close();
 		db.close();
 	}
@@ -33,7 +34,7 @@ public class PlayDAOImpl implements PlayDAO{
 	public void DeletePlay(String Ano,String Mno) throws Exception {
 		
 		DateBaseconnection db=new DateBaseconnection();
-		PreparedStatement pstm=db.getConnection().prepareStatement("delete form Movies where ANO=? and MNO=?");
+		PreparedStatement pstm=db.getConnection().prepareStatement("delete form Play where ANO=? and MNO=?");
 		pstm.setString(1, Ano);
 		pstm.setString(1, Mno);
 		pstm.executeUpdate();

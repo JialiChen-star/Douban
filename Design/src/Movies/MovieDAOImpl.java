@@ -13,7 +13,7 @@ public class MovieDAOImpl implements MovieDAO{
 	
 		DateBaseconnection db=new DateBaseconnection();
 		db.getConnection();
-		PreparedStatement pstm=db.getConnection().prepareStatement("insert into S values(?,?,?,?,?,?,?,?,?,?)");
+		PreparedStatement pstm=db.getConnection().prepareStatement("insert into Movie values(?,?,?,?,?,?,?,?,?,?)");
 		pstm.setString(1, mo.getMno());
 		pstm.setString(2, mo.getMn());
 		pstm.setString(3, mo.getMmn());

@@ -1,5 +1,6 @@
 package Discussion;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -18,7 +19,8 @@ public class RePlayDAOImpl implements RePlayDAO{
 		pstm.setString(3, re.getTono());
 		pstm.setString(4, re.getUno());
 		pstm.setString(1, re.getRcont());
-		pstm.setDate(5, re.getRt());
+		pstm.setDate(5, (Date) re.getRt());
+		pstm.executeUpdate();
 		pstm.close();
 		db.close();
 	}

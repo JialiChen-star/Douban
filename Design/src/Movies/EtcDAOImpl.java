@@ -13,7 +13,7 @@ public class EtcDAOImpl implements EtcDAO{
 		
 		DateBaseconnection db=new DateBaseconnection();
 		db.getConnection();
-		PreparedStatement pstm=db.getConnection().prepareStatement("insert into S values(?,?,?,?,?,?,?)");
+		PreparedStatement pstm=db.getConnection().prepareStatement("insert into Etc values(?,?,?,?,?,?,?)");
 		pstm.setString(1, et.getEno());
 		pstm.setString(2, et.getEn());
 		pstm.setString(3, et.getEsex());
@@ -21,6 +21,7 @@ public class EtcDAOImpl implements EtcDAO{
 		pstm.setString(5, et.getEpic());
 		pstm.setString(6, et.getEbri());
 		pstm.setString(7, et.getEBrith());
+		pstm.executeUpdate();
 		pstm.close();
 		db.close();
 	}
@@ -33,7 +34,7 @@ public class EtcDAOImpl implements EtcDAO{
 
 	public void DeleteEtc(String Eno) throws Exception {
 		DateBaseconnection db=new DateBaseconnection();
-		PreparedStatement pstm=db.getConnection().prepareStatement("delete form Movies where ENO=?");
+		PreparedStatement pstm=db.getConnection().prepareStatement("delete form Etc where ENO=?");
 		pstm.setString(1, Eno);
 		pstm.executeUpdate();
 		pstm.close();

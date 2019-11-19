@@ -13,7 +13,7 @@ public class DirectorDAOImpl implements DirectorDAO{
 		
 		DateBaseconnection db=new DateBaseconnection();
 		db.getConnection();
-		PreparedStatement pstm=db.getConnection().prepareStatement("insert into Directors values(?,?,?,?,?,?,?)");
+		PreparedStatement pstm=db.getConnection().prepareStatement("insert into Director values(?,?,?,?,?,?,?)");
 		pstm.setString(1, dir.getDno());
 		pstm.setString(2, dir.getDn());
 		pstm.setString(3, dir.getDsex());
@@ -34,7 +34,7 @@ public class DirectorDAOImpl implements DirectorDAO{
 
 	public void DeleteDirector(String Dno) throws Exception {
 		DateBaseconnection db=new DateBaseconnection();
-		PreparedStatement pstm=db.getConnection().prepareStatement("delete form Directors where DNO=?");
+		PreparedStatement pstm=db.getConnection().prepareStatement("delete form Director where DNO=?");
 		pstm.setString(1, Dno);
 		pstm.executeUpdate();
 		pstm.close();
@@ -44,7 +44,7 @@ public class DirectorDAOImpl implements DirectorDAO{
 	public Director getDirector(String Dno) throws Exception {
 		Director director=new Director();
 		DateBaseconnection db=new DateBaseconnection();
-		PreparedStatement pstm=db.getConnection().prepareStatement("selete * from Directors where DNO=?");
+		PreparedStatement pstm=db.getConnection().prepareStatement("selete * from Director where DNO=?");
 		pstm.setString(1, Dno);
 		ResultSet rs=pstm.executeQuery();
 		while(rs.next())

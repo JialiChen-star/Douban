@@ -22,7 +22,7 @@ public class EditDAOImpl implements EditDAO{
 	public void DeleteEdit(String Mno, String Eno) throws Exception {
 		
 		DateBaseconnection db=new DateBaseconnection();
-		PreparedStatement pstm=db.getConnection().prepareStatement("delete from Direct where MNO=? and ENO=?");
+		PreparedStatement pstm=db.getConnection().prepareStatement("delete from Edit where MNO=? and ENO=?");
 		pstm.setString(1, Mno);
 		pstm.setString(2, Eno);
 		pstm.executeUpdate();

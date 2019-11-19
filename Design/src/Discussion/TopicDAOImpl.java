@@ -20,6 +20,7 @@ public class TopicDAOImpl implements TopicDAO{
 		pstm.setString(3, to.getUno());
 		pstm.setString(4, to.getCont());
 		pstm.setDate(5, (Date) to.getTot());
+		pstm.executeUpdate();
 		pstm.close();
 		db.close();
 	}

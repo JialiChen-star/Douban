@@ -22,7 +22,7 @@ public class DiscussionDAOFactory {
 	public static PublishDAO getPublishDAO() {
 		return new PublishDAOImpl();
 	}
-	public static Comment getCommnet() {
-		return new Comment();
+	public static CommentDAO getCommnetDAO() {
+		return new CommentDAOImpl();
 	}
 }

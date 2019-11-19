@@ -13,13 +13,13 @@ public class ActorDAOImpl implements ActorDAO{
 		
 		DateBaseconnection db=new DateBaseconnection();
 		db.getConnection();
-		PreparedStatement pstm=db.getConnection().prepareStatement("insert into S values(?,?,?,?,?,?,?)");
+		PreparedStatement pstm=db.getConnection().prepareStatement("insert into Actors values(?,?,?,?,?,?,?)");
 		pstm.setString(1, ac.getAno());
 		pstm.setString(2, ac.getAn());
 		pstm.setString(3, ac.getAsex());
 		pstm.setString(4, ac.getAcon());
-		pstm.setString(5, ac.getAbri());
 		pstm.setString(6, ac.getApic());
+		pstm.setString(5, ac.getAbri());
 		pstm.setString(7, ac.getABrith());
 		pstm.executeUpdate();
 		pstm.close();
@@ -37,7 +37,7 @@ public class ActorDAOImpl implements ActorDAO{
 	public void DeleteActor(String Ano) throws Exception {
 		
 		DateBaseconnection db=new DateBaseconnection();
-		PreparedStatement pstm=db.getConnection().prepareStatement("delete form Movies where ANO=?");
+		PreparedStatement pstm=db.getConnection().prepareStatement("delete form Actors where ANO=?");
 		pstm.setString(1, Ano);
 		pstm.executeUpdate();
 		pstm.close();
@@ -48,7 +48,7 @@ public class ActorDAOImpl implements ActorDAO{
 		
 		Actor actor=new Actor();
 		DateBaseconnection db=new DateBaseconnection();
-		PreparedStatement pstm=db.getConnection().prepareStatement("selete * from Actor where ANO=?");
+		PreparedStatement pstm=db.getConnection().prepareStatement("selete * from Actors where ANO=?");
 		pstm.setString(1, Ano);
 		ResultSet rs=pstm.executeQuery();
 		while(rs.next())
@@ -57,8 +57,8 @@ public class ActorDAOImpl implements ActorDAO{
 			actor.setAn(rs.getString(2));
 			actor.setAsex(rs.getString(3));
 			actor.setAcon(rs.getString(4));
-			actor.setAbri(rs.getString(5));
 			actor.setApic(rs.getString(6));
+			actor.setAbri(rs.getString(5));
 			actor.setABrith(rs.getString(7));
 		}
 		rs.close();
@@ -80,8 +80,8 @@ public class ActorDAOImpl implements ActorDAO{
 			actor.setAn(rs.getString(2));
 			actor.setAsex(rs.getString(3));
 			actor.setAcon(rs.getString(4));
-			actor.setAbri(rs.getString(5));
 			actor.setApic(rs.getString(6));
+			actor.setAbri(rs.getString(5));
 			actor.setABrith(rs.getString(7));
 			actors.add(actor);
 		}

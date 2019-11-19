@@ -19,6 +19,7 @@ public class DiscussionDAOImpl implements DiscussionDAO{
 		pstm.setString(3, di.getDBri());
 		pstm.setDate(4, (Date) di.getDct());
 		pstm.setString(5, di.getDisn());
+		pstm.executeUpdate();
 		db.close();
 	}
 

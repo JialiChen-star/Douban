@@ -1,6 +1,6 @@
 package Discussion;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class RePlay {
 	private String Reno;	//ªÿ∏¥ªÚ∆¿¬€±‡∫≈
@@ -35,7 +35,7 @@ public class RePlay {
 	public Date getRt() {
 		return Rt;
 	}
-	public void setRt(Date rt) {
-		Rt = rt;
+	public void setRt(Date date) {
+		Rt = date;
 	}
 }
