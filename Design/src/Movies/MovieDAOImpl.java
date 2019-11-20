@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class MovieDAOImpl implements MovieDAO{
 
+	Scanner in=new Scanner(System.in);
 	public void InsertMovie(Movie mo) throws Exception {
 	
 		DateBaseconnection db=new DateBaseconnection();
@@ -74,7 +75,7 @@ public class MovieDAOImpl implements MovieDAO{
 	}
 
 	public List<Movie> GetMovies(String sql) throws Exception{
-		Scanner in=new Scanner(System.in);
+		
 		List<Movie> movies=new ArrayList<Movie>();
 		DateBaseconnection db=new DateBaseconnection();
 		PreparedStatement pstm=db.getConnection().prepareStatement(sql);

@@ -20,6 +20,7 @@ public class TopicDAOImpl implements TopicDAO{
 		pstm.setString(3, to.getUno());
 		pstm.setString(4, to.getCont());
 		pstm.setDate(5, (Date) to.getTot());
+		pstm.setString(6, to.getDisno());
 		pstm.executeUpdate();
 		pstm.close();
 		db.close();
@@ -53,6 +54,7 @@ public class TopicDAOImpl implements TopicDAO{
 			topic.setUno(rs.getString(3));
 			topic.setCont(rs.getString(4));
 			topic.setTot(rs.getDate(5));
+			topic.setDisno(rs.getString(6));
 		}
 		return null;
 	}
@@ -71,6 +73,7 @@ public class TopicDAOImpl implements TopicDAO{
 			topic.setUno(rs.getString(3));
 			topic.setCont(rs.getString(4));
 			topic.setTot(rs.getDate(5));
+			topic.setDisno(rs.getString(6));
 			topics.add(topic);
 		}
 		rs.close();

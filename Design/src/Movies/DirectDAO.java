@@ -1,6 +1,5 @@
 package Movies;
 
-import java.beans.Expression;
 import java.util.List;
 
 public interface DirectDAO {

@@ -7,6 +7,7 @@ public class Topic {
 
 	private String Tono;	//话题编号
 	private String Ton;		//话题名
+	private String Disno;	//所在小组编号
 	private String Uno;		//用户编码
 	private String Cont;	//话题内容
 	private Date Tot;	//话题创建时间
@@ -40,5 +41,10 @@ public class Topic {
 	public void setTot(Date tot) {
 		Tot = tot;
 	}
-	
+	public String getDisno() {
+		return Disno;
+	}
+	public void setDisno(String disno) {
+		Disno = disno;
+	}
 }

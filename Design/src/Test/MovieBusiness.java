@@ -1,31 +1,22 @@
 package Test;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Spliterator;
-
-import javax.naming.spi.DirStateFactory.Result;
-import javax.swing.text.html.HTMLDocument.Iterator;
-
-import org.omg.PortableInterceptor.Interceptor;
-
 import DAO.*;
 import DateBaseConnection.DateBaseconnection;
 import Movies.*;
 public class MovieBusiness {
 
-	private static final String SELECT_TYPE="selete * from Movie where MT like '%?%'";
-	private static final String SELECT_MOVIENAME="select * from Movie where MN like '%?%'";
-	private static final String SELECT_LANGUAGE="select * from Movie where ML like '%?%'";
-	private static final String SELECT_COUNTRY="select * from Movie where ACON like '%?%'";
-	
+	private static final String SELECT_TYPE="select * from Movie where MT like '%'+?+'%'";
+	private static final String SELECT_MOVIENAME="select * from Movie where MN like '%'+?+'%'";
+	private static final String SELECT_LANGUAGE="select * from Movie where ML like '%'+?+'%'";
+	private static final String SELECT_COUNTRY="select * from Movie where ACON like '%'+?+'%'";
+	static Scanner in=new Scanner(System.in);
 	public static void AddMovieMessage() throws Exception{//电影信息插入
 		
 		Movie movie=new Movie();
 //		System.out.println("输入电影信息（输入null则代表该电影此信息为空）");
-		Scanner in=new Scanner(System.in);
 //		System.out.print("请输入电影编号：");
 		String movieid=in.next();
 		movie.setMno(movieid);
@@ -51,12 +42,12 @@ public class MovieBusiness {
 		AddActor(movieid);
 		AddDirector(movieid);
 		AddEtc(movieid);
-		in.close();
+		
 	}
 	
 	public static void AddActor(String movieid) throws Exception{
 		
-		Scanner in=new Scanner(System.in);
+	//	Scanner in=new Scanner(System.in);
 //		System.out.print("请输入电影参演演员 编号、饰演角色及职称（即主演或配角）：");//演员参演电影表
 		Play play=new Play();
 		play.setMno(movieid);
@@ -86,13 +77,11 @@ public class MovieBusiness {
 //			System.out.print("请输入演员出生日期:");
 			actor.setABrith(in.next());
 			MovieDAOFactory.getActorDAO().InsertActor(actor);
-		}
-		in.close();
+		}	
 	}
 	
 	public static void AddDirector(String movieid) throws Exception{
 		
-		Scanner in=new Scanner(System.in);
 		Direct direct=new Direct();
 //		System.out.println("请输入导演编号：");
 		DateBaseconnection db=new DateBaseconnection();
@@ -121,12 +110,11 @@ public class MovieBusiness {
 			MovieDAOFactory.getDirectorDAO().InsertDirector(director);
 		}
 		MovieDAOFactory.getDirectDAO().InsertDirect(direct);
-		in.close();
+		
 	}
 	
 	public static void AddEtc(String movieid) throws Exception{
 	
-		Scanner in=new Scanner(System.in);
 //		System.out.println("请输入编剧编号：");
 		String str=null;
 		str=in.next();
@@ -156,8 +144,7 @@ public class MovieBusiness {
 		}
 		edit.setEno(str);
 		edit.setMno(movieid);
-		MovieDAOFactory.getEditDAO().InsertEdit(edit);
-		in.close();
+		MovieDAOFactory.getEditDAO().InsertEdit(edit);	
 	}
 	
 	public static List<Movie> Sereach() throws Exception{//演员信息的输入
@@ -167,44 +154,38 @@ public class MovieBusiness {
 //		System.out.println("输入name按电影名查找");
 //		System.out.println("输入langue按电影语言查找");
 //		System.out.println("输入country按电影制片地区查找");
-		Scanner in=new Scanner(System.in);
+		
 		String selete=in.next();
 //		List<Movie> movies=new ArrayList<Movie>();
 		if(selete.equals("type"))
 		{
 //			System.out.println("请输入要查找类型(喜剧，动作，悬疑，恐怖，爱情，科幻，战争，青春，都市，武侠，卡通，仙侠)：");
-			in.close();
 			 return MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_TYPE);
 		}
 		else if(selete.equals("name"))
 		{
 //			System.out.println("请输入要查找电影名：");
-			in.close();
 			return MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_MOVIENAME);
 		}
 		else if(selete.equals("languege"))
 		{
 //			System.out.println("请输入要查找电影语言：");
-			in.close();
 			return MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_LANGUAGE);
 		}
 		else if(selete.equals("country"))
 		{
 //			System.out.println("请输入要查找电影制片国家：");
-			in.close();
 			return MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_COUNTRY);
 		}
 		else
 		{
 //			System.out.println("输入错误！");
-			in.close();
 			return null;
 		}	
 	}
 		
 	public static void insertdirector(Director di) throws Exception{
 		
-		Scanner in=new Scanner(System.in);
 		Director director=new Director();
 //		System.out.println("请输入导演编号");
 		director.setDno(in.next());
@@ -221,12 +202,11 @@ public class MovieBusiness {
 //		System.out.print("请插入演员图片:");
 		director.setDpic(in.next());
 		MovieDAOFactory.getDirectorDAO().InsertDirector(director);
-		in.close();
 	}
 
 	public static void insertactor(Actor actor)throws Exception
 	{
-		Scanner in=new Scanner(System.in);
+//		Scanner in=new Scanner(System.in);
 //		System.out.println("请输入演员编号：");
 		actor.setAno(in.next());
 //		System.out.print("请输入演员姓名:");
@@ -242,12 +222,11 @@ public class MovieBusiness {
 //		System.out.print("请输入演员出生日期:");
 		actor.setABrith(in.next());
 		MovieDAOFactory.getActorDAO().InsertActor(actor);
-		in.close();
 	}
 
 	public static void insertetc(Etc etc) throws Exception{
 		
-		Scanner in=new Scanner(System.in);
+//		Scanner in=new Scanner(System.in);
 		etc.setEno(in.next());
 //		System.out.print("请输入编剧姓名:");
 		etc.setEn(in.next());
@@ -262,7 +241,6 @@ public class MovieBusiness {
 //		System.out.print("请插入编剧图片:");
 		etc.setEpic(in.next());
 		MovieDAOFactory.getEtcDAO().InsertEtc(etc);
-		in.close();
 	}
 }
 

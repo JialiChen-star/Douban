@@ -6,18 +6,25 @@ import java.util.Scanner;
 
 public class DiscussionBusiness {
 
+	private static final String DISCUSS_TEAM="select *from Discussion where DISNO=?";//查找一个小组
+	private static final String TEAM_TOPIC="select * from Topic group by DISNO having (DISNO=?)";//查找一个小组中的所有话题
+	private static final String USER_REPLAY="select * from RePlay group by UNO having (UNO=?)";//查找一个人的所有评论
+	private static final String TOPIC_REPLAY="select * from RePlay group by TONO having (TONO=?)";//查找一个话题的所有评论
+	private static final String USER_TOPIC="select * from Topic where TONO=(select TONO from InitTopic group by UNO having UNO=?)";
+	
 	public static void AddDiscussion() throws Exception{
 		
 		Scanner in=new Scanner(System.in);
 		Member member=new Member();
 		discussion discuss=new discussion();
-		discuss.setDisno(in.next());//输入讨论组编号
+		String disno=in.next();
+		discuss.setDisno(disno);//输入讨论组编号
 		discuss.setUno(in.next());//讨论组长（用户编号）
 		discuss.setDBri(in.next());//简介
 		discuss.setDct(new Date(System.currentTimeMillis()));//创建时间
 		discuss.setDisn(in.next());//简介
-		member.setDisno(discuss.getDisno());
-		member.setUno(discuss.getUno());
+		member.setDisno(discuss.getDisno());	//将小组编号写入小组与用户之间的表中
+		member.setUno(discuss.getUno());	//将用户编号写入小组与用户之间的表中
 		DiscussionDAOFactory.getDiscussionDAO().InsertDiscussion(discuss);
 		DiscussionDAOFactory.getMemberDAO().InsertMember(member);
 		in.close();
@@ -27,8 +34,10 @@ public class DiscussionBusiness {
 		
 		Scanner in=new Scanner(System.in);
 		Topic topic=new Topic();	
-		topic.setTono(in.next());	//话题编号
+		String tono=in.next();
+		topic.setTono(tono);	//话题编号
 		topic.setTon(in.next());	//话题名
+		topic.setDisno(in.next()); 	//小组编号
 		topic.setUno(in.next());	//用户编号
 		topic.setCont(in.next());	//话题内容
 		topic.setTot(new Date(System.currentTimeMillis()));	//创建话题时间
@@ -60,5 +69,4 @@ public class DiscussionBusiness {
 		DiscussionDAOFactory.getRePlayDAO().InsertRePlay(replay);
 		in.close();
 	}
-	
 }

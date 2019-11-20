@@ -18,8 +18,8 @@ public class ActorDAOImpl implements ActorDAO{
 		pstm.setString(2, ac.getAn());
 		pstm.setString(3, ac.getAsex());
 		pstm.setString(4, ac.getAcon());
-		pstm.setString(6, ac.getApic());
 		pstm.setString(5, ac.getAbri());
+		pstm.setString(6, ac.getApic());
 		pstm.setString(7, ac.getABrith());
 		pstm.executeUpdate();
 		pstm.close();
@@ -57,8 +57,8 @@ public class ActorDAOImpl implements ActorDAO{
 			actor.setAn(rs.getString(2));
 			actor.setAsex(rs.getString(3));
 			actor.setAcon(rs.getString(4));
-			actor.setApic(rs.getString(6));
 			actor.setAbri(rs.getString(5));
+			actor.setApic(rs.getString(6));
 			actor.setABrith(rs.getString(7));
 		}
 		rs.close();
@@ -80,8 +80,8 @@ public class ActorDAOImpl implements ActorDAO{
 			actor.setAn(rs.getString(2));
 			actor.setAsex(rs.getString(3));
 			actor.setAcon(rs.getString(4));
-			actor.setApic(rs.getString(6));
 			actor.setAbri(rs.getString(5));
+			actor.setApic(rs.getString(6));
 			actor.setABrith(rs.getString(7));
 			actors.add(actor);
 		}

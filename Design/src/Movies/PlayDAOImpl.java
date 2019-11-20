@@ -14,8 +14,8 @@ public class PlayDAOImpl implements PlayDAO{
 		DateBaseconnection db=new DateBaseconnection();
 		db.getConnection();
 		PreparedStatement pstm=db.getConnection().prepareStatement("insert into Play values(?,?,?,?)");
-		pstm.setString(1, pl.getAno());
-		pstm.setString(2, pl.getMno());
+		pstm.setString(1, pl.getMno());
+		pstm.setString(2, pl.getAno());
 		pstm.setString(3, pl.getPro());
 		pstm.setString(4, pl.getPn());
 		pstm.executeUpdate();
@@ -36,7 +36,7 @@ public class PlayDAOImpl implements PlayDAO{
 		DateBaseconnection db=new DateBaseconnection();
 		PreparedStatement pstm=db.getConnection().prepareStatement("delete form Play where ANO=? and MNO=?");
 		pstm.setString(1, Ano);
-		pstm.setString(1, Mno);
+		pstm.setString(2, Mno);
 		pstm.executeUpdate();
 		pstm.close();
 		db.close();
@@ -51,8 +51,8 @@ public class PlayDAOImpl implements PlayDAO{
 		ResultSet rs=pstm.executeQuery();
 		while(rs.next())
 		{
-			play.setAno(rs.getString(1));
-			play.setMno(rs.getString(2));
+			play.setMno(rs.getString(1));
+			play.setAno(rs.getString(2));
 			play.setPro(rs.getString(3));
 			play.setPn(rs.getString(4));
 		}
@@ -70,8 +70,8 @@ public class PlayDAOImpl implements PlayDAO{
 		while(rs.next())
 		{
 			Play play=new Play();
-			play.setAno(rs.getString(1));
-			play.setMno(rs.getString(2));
+			play.setMno(rs.getString(1));
+			play.setAno(rs.getString(2));
 			play.setPro(rs.getString(4));
 			play.setPn(rs.getString(3));
 			plays.add(play);

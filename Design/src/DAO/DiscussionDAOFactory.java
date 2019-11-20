@@ -10,9 +10,6 @@ public class DiscussionDAOFactory {
 	public static TopicDAO getTopicDAO() {
 		return new TopicDAOImpl();
 	}	
-	public static TalkDAO getTalkDAO() {
-		return new TalkDAOImpl();
-	}
 	public static MemberDAO getMemberDAO() {
 		return new MemberDAOImpl();
 	}
