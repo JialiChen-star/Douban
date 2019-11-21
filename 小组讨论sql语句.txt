@@ -1,0 +1,42 @@
+//查找一个小组
+select *
+from Discussion
+where DISNO=?
+
+//查找一个小组中的所有话题
+select *
+from Topic
+group by DISNO
+having (DISNO=?)
+
+//查找一个人的所有评论
+select *
+from RePlay
+group by UNO
+having (UNO=?)
+
+//查找一个话题的所有评论
+select *
+from RePlay
+group by TONO
+having (TONO=?)
+
+//查找某个人在某个小组中的所有话题
+select *
+from Topic
+where TONO=(select TONO
+	   from InitTopic
+	   group by UNO
+	   having UNO=?)
+
+//查找某个人在某个小组中的所有评论
+select *
+from RePlay
+where UNO=(
+	select UNO
+	from Member
+	where (RePlay.UNO= ? or Member.UNO) and DISNO=? )
+
+
+
+
