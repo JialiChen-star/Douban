@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class MovieDAOImpl implements MovieDAO{
+import DAO.MovieDAOFactory;
 
+public class MovieDAOImpl implements MovieDAO{
+	
 	Scanner in=new Scanner(System.in);
 	public void InsertMovie(Movie mo) throws Exception {
 	
@@ -47,7 +49,7 @@ public class MovieDAOImpl implements MovieDAO{
 		InsertMovie(mo);
 	}
 
-	public Movie getMovie(String Mno) throws Exception{
+	public Movie getMovie(String Mno) throws Exception{//∞¥’’µÁ”∞±‡∫≈ch
 		
 		Movie movie=new Movie();
 		DateBaseconnection db=new DateBaseconnection();

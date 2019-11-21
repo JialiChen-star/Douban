@@ -2,6 +2,7 @@ package Test;
 import Discussion.*;
 import DAO.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class DiscussionBusiness {
@@ -68,5 +69,25 @@ public class DiscussionBusiness {
 		DiscussionDAOFactory.getCommnetDAO().InsertComment(comment);
 		DiscussionDAOFactory.getRePlayDAO().InsertRePlay(replay);
 		in.close();
+	}
+	
+	public static List<discussion> Searchdiscussion() throws Exception{
+		return DiscussionDAOFactory.getDiscussionDAO().getDiscussions(DISCUSS_TEAM);
+	}
+	
+	public static List<RePlay> SearchUserreplay() throws Exception{
+		return DiscussionDAOFactory.getRePlayDAO().getRePlays(USER_REPLAY);
+	}
+	
+	public static List<RePlay> SearchTopicreplay() throws Exception{
+		return DiscussionDAOFactory.getRePlayDAO().getRePlays(USER_TOPIC);
+	}
+	
+	public static List<Topic> SearchUsertopic() throws Exception{
+		return DiscussionDAOFactory.getTopicDAO().getTopics(USER_TOPIC);
+	}
+	
+	public static List<Topic> SearchTeamtopic() throws Exception{
+		return DiscussionDAOFactory.getTopicDAO().getTopics(TEAM_TOPIC);
 	}
 }

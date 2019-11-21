@@ -12,6 +12,43 @@ public class MovieBusiness {
 	private static final String SELECT_MOVIENAME="select * from Movie where MN like '%'+?+'%'";
 	private static final String SELECT_LANGUAGE="select * from Movie where ML like '%'+?+'%'";
 	private static final String SELECT_COUNTRY="select * from Movie where ACON like '%'+?+'%'";
+	private static final String SELECT_MOVIEID="select * from Movie where MNO =?";
+	private static final String SELECT_BYACTOR="select * from Movie where MNO=(select MNO from Play where ANO=?)";
+	private static final String SELECT_BYDIRECOR="select * from Movie where MNO=(select MNO from Direct where DNO=?)";
+	private static final String SELECT_BYETC="select * from Movie where MNO=(select MNO from Etc where ENO=?)";
+	
+	public static List<Movie> SearchbyMoivetype() throws Exception{//按条件查找电影
+
+		return MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_TYPE);//	 请输入要查找类型喜剧，动作，悬疑，恐怖，爱情，科幻，战争，青春，都市，武侠，卡通，仙侠
+	}
+	public static List<Movie> SearchbyMoiveName() throws Exception{//按条件查找电影
+		
+		return MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_MOVIENAME);	//			请输入要查找电影名：
+	}
+	public static List<Movie> SearchbyMoiveLanguage() throws Exception{//按条件电影语言查找电影
+		
+		return MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_LANGUAGE);
+	}
+	public static List<Movie> SearchbyMoivecountry() throws Exception{//按条件查找电影
+		
+			return MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_COUNTRY);//按电影制片国家查找
+	}
+	
+	public static List<Movie> SearchbyActor()throws Exception{
+		
+		return MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_BYACTOR);
+	}
+	
+	public static List<Movie> SearchbyDirector()throws Exception{
+		
+		return MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_BYDIRECOR);
+	}
+	
+	public static List<Movie> SearchbyEtc()throws Exception{
+		
+		return MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_BYETC);
+	}
+	
 	static Scanner in=new Scanner(System.in);
 	public static void AddMovieMessage() throws Exception{//电影信息插入
 		
@@ -146,61 +183,17 @@ public class MovieBusiness {
 		edit.setMno(movieid);
 		MovieDAOFactory.getEditDAO().InsertEdit(edit);	
 	}
-	
-	public static List<Movie> Sereach() throws Exception{//演员信息的输入
-
-//		System.out.println("请输入想要查询的电影信息：");
-//		System.out.println("输入type按电影类型查找");
-//		System.out.println("输入name按电影名查找");
-//		System.out.println("输入langue按电影语言查找");
-//		System.out.println("输入country按电影制片地区查找");
-		
-		String selete=in.next();
-//		List<Movie> movies=new ArrayList<Movie>();
-		if(selete.equals("type"))
-		{
-//			System.out.println("请输入要查找类型(喜剧，动作，悬疑，恐怖，爱情，科幻，战争，青春，都市，武侠，卡通，仙侠)：");
-			 return MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_TYPE);
-		}
-		else if(selete.equals("name"))
-		{
-//			System.out.println("请输入要查找电影名：");
-			return MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_MOVIENAME);
-		}
-		else if(selete.equals("languege"))
-		{
-//			System.out.println("请输入要查找电影语言：");
-			return MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_LANGUAGE);
-		}
-		else if(selete.equals("country"))
-		{
-//			System.out.println("请输入要查找电影制片国家：");
-			return MovieDAOFactory.getMoivesDAO().GetMovies(SELECT_COUNTRY);
-		}
-		else
-		{
-//			System.out.println("输入错误！");
-			return null;
-		}	
-	}
 		
 	public static void insertdirector(Director di) throws Exception{
 		
 		Director director=new Director();
-//		System.out.println("请输入导演编号");
-		director.setDno(in.next());
-//		System.out.print("请输入导演姓名:");
-		director.setDn(in.next());
-//		System.out.print("请输入演员性别:");
-		director.setDsex(in.next());
-//		System.out.print("请输入演员国籍:");
-		director.setDcon(in.next());
-//		System.out.print("请输入演员出生日期:");
-		director.setDBrith(in.next());
-//		System.out.print("请输入演员简介:");
-		director.setDbri(in.next());
-//		System.out.print("请插入演员图片:");
-		director.setDpic(in.next());
+		director.setDno(in.next());//请输入导演编号
+		director.setDn(in.next());//请输入导演姓名
+		director.setDsex(in.next());//请输入演员性别
+		director.setDcon(in.next());//	请输入演员国籍
+		director.setDBrith(in.next());//	请输入演员出生日期
+		director.setDbri(in.next());//请输入演员简介
+		director.setDpic(in.next());//	请插入演员图片
 		MovieDAOFactory.getDirectorDAO().InsertDirector(director);
 	}
 
